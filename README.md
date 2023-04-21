@@ -56,7 +56,7 @@ Heath check.
 ## Examples
 
 ```console
-$ docker run -d -P --name iamfoo wanghkkk/whoami:v1.0
+$ docker run -d -P --name iamfoo wanghkkk/whoami:v1
 
 $ docker inspect --format '{{ .NetworkSettings.Ports }}'  iamfoo
 map[80/tcp:[{0.0.0.0 32769}]]
