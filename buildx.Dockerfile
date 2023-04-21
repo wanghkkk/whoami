@@ -11,13 +11,16 @@ FROM alpine:3.17
 
 COPY whoami /
 
-ENV LANG en_US.utf8
-ENV LC_ALL en_US.utf8
+ENV LANG=en_US.utf8
+ENV LC_ALL=en_US.utf8
+ENV TZ=Asia/Shanghai
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
-    && apk --no-cache --no-progress add ca-certificates tzdata iproute2 iputils curl\
-    && cp -a /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    && apk --no-cache --no-progress add ca-certificates tzdata iproute2 iputils curl \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo Asia/Shanghai > /etc/timezone
 
-ENV WHOAMI_VERSION=v1.0
+ENV PATH=${PATH}:/usr/bin
+ENV WHOAMI_VERSION=v1
 ENTRYPOINT ["/whoami"]
 EXPOSE 80
