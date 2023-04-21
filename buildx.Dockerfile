@@ -9,16 +9,14 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
 # syntax=docker/dockerfile:1.2
 FROM alpine:3.17
 
-COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY whoami /
 
 ENV LANG en_US.utf8
 ENV LC_ALL en_US.utf8
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
-    && apk --no-cache --no-progress add iproute2 iputils curl
+    && apk --no-cache --no-progress add ca-certificates tzdata iproute2 iputils curl\
+    && cp -a /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ENV WHOAMI_VERSION=v1.0
 ENTRYPOINT ["/whoami"]
