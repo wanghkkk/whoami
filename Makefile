@@ -1,7 +1,5 @@
-.PHONY: default check test build image
-
 IMAGE_NAME := wanghkkk/whoami
-TAG := v1
+TAG := v2
 
 default: push
 

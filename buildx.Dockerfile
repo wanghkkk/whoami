@@ -33,6 +33,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
     && apk --no-cache --no-progress add iproute2 iputils curl
 
 ENV PATH=${PATH}:/usr/bin
-ENV WHOAMI_VERSION=v1
+ENV WHOAMI_VERSION=v2
 ENTRYPOINT ["/whoami"]
 EXPOSE 80
